@@ -1,0 +1,231 @@
+{
+  "stations": [
+    {
+      "stationId": "A",
+      "zones": [
+        {
+          "zoneId": 1
+        }
+      ]
+    },
+    {
+      "stationId": "B",
+      "zones": [
+        {
+          "zoneId": 1
+        }
+      ]
+    },
+    {
+      "stationId": "C",
+      "zones": [
+        {
+          "zoneId": 2
+        },
+        {
+          "zoneId": 3
+        }
+      ]
+    },
+    {
+      "stationId": "D",
+      "zones": [
+        {
+          "zoneId": 2
+        }
+      ]
+    },
+    {
+      "stationId": "E",
+      "zones": [
+        {
+          "zoneId": 2
+        },
+        {
+          "zoneId": 3
+        }
+      ]
+    },
+    {
+      "stationId": "F",
+      "zones": [
+        {
+          "zoneId": 3
+        },
+        {
+          "zoneId": 4
+        }
+      ]
+    },
+    {
+      "stationId": "G",
+      "zones": [
+        {
+          "zoneId": 4
+        }
+      ]
+    },
+    {
+      "stationId": "H",
+      "zones": [
+        {
+          "zoneId": 4
+        }
+      ]
+    },
+    {
+      "stationId": "I",
+      "zones": [
+        {
+          "zoneId": 4
+        }
+      ]
+    }
+  ],
+  "pricingRules": [
+    {
+      "departureZone": {
+        "zoneId": 1
+      },
+      "arrivalZone": {
+        "zoneId": 1
+      },
+      "price": 240
+    },
+    {
+      "departureZone": {
+        "zoneId": 1
+      },
+      "arrivalZone": {
+        "zoneId": 2
+      },
+      "price": 240
+    },
+    {
+      "departureZone": {
+        "zoneId": 2
+      },
+      "arrivalZone": {
+        "zoneId": 1
+      },
+      "price": 240
+    },
+    {
+      "departureZone": {
+        "zoneId": 2
+      },
+      "arrivalZone": {
+        "zoneId": 2
+      },
+      "price": 240
+    },
+    {
+      "departureZone": {
+        "zoneId": 3
+      },
+      "arrivalZone": {
+        "zoneId": 3
+      },
+      "price": 200
+    },
+    {
+      "departureZone": {
+        "zoneId": 3
+      },
+      "arrivalZone": {
+        "zoneId": 4
+      },
+      "price": 200
+    },
+    {
+      "departureZone": {
+        "zoneId": 4
+      },
+      "arrivalZone": {
+        "zoneId": 3
+      },
+      "price": 200
+    },
+    {
+      "departureZone": {
+        "zoneId": 4
+      },
+      "arrivalZone": {
+        "zoneId": 4
+      },
+      "price": 200
+    },
+    {
+      "departureZone": {
+        "zoneId": 3
+      },
+      "arrivalZone": {
+        "zoneId": 1
+      },
+      "price": 280
+    },
+    {
+      "departureZone": {
+        "zoneId": 3
+      },
+      "arrivalZone": {
+        "zoneId": 2
+      },
+      "price": 280
+    },
+    {
+      "departureZone": {
+        "zoneId": 4
+      },
+      "arrivalZone": {
+        "zoneId": 1
+      },
+      "price": 300
+    },
+    {
+      "departureZone": {
+        "zoneId": 4
+      },
+      "arrivalZone": {
+        "zoneId": 2
+      },
+      "price": 300
+    },
+    {
+      "departureZone": {
+        "zoneId": 1
+      },
+      "arrivalZone": {
+        "zoneId": 3
+      },
+      "price": 280
+    },
+    {
+      "departureZone": {
+        "zoneId": 2
+      },
+      "arrivalZone": {
+        "zoneId": 3
+      },
+      "price": 280
+    },
+    {
+      "departureZone": {
+        "zoneId": 1
+      },
+      "arrivalZone": {
+        "zoneId": 4
+      },
+      "price": 300
+    },
+    {
+      "departureZone": {
+        "zoneId": 2
+      },
+      "arrivalZone": {
+        "zoneId": 4
+      },
+      "price": 300
+    }
+  ]
+}
