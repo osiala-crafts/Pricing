@@ -4,32 +4,32 @@ import java.util.List;
 
 public class CustomerSummaryDto {
 
-    private String customerId;
-    private String totalCostInCents;
+    private Long customerId;
+    private Integer totalCostInCents;
     private List<TripDto> trips;
 
     public CustomerSummaryDto() {
     }
 
-    public CustomerSummaryDto(String customerId, String totalCostInCents, List<TripDto> trips) {
+    public CustomerSummaryDto(Long customerId, Integer totalCostInCents, List<TripDto> trips) {
         this.customerId = customerId;
         this.totalCostInCents = totalCostInCents;
         this.trips = trips;
     }
 
-    public String getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
-    public String getTotalCostInCents() {
+    public Integer getTotalCostInCents() {
         return totalCostInCents;
     }
 
-    public void setTotalCostInCents(String totalCostInCents) {
+    public void setTotalCostInCents(Integer totalCostInCents) {
         this.totalCostInCents = totalCostInCents;
     }
 

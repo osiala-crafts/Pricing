@@ -1,27 +1,17 @@
 package com.pricing.application.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pricing.application.utils.UnixTimestampDeserializer;
-import com.pricing.application.utils.UnixTimestampSerializer;
-
-import java.time.Instant;
-
 public class TapDto {
-    @JsonProperty("unixTimestamp")
-    @JsonSerialize(using = UnixTimestampSerializer.class)
-    @JsonDeserialize(using = UnixTimestampDeserializer.class)
-    private Instant tapDate;
+
+    private Long unixTimestamp;
     private Long customerId;
     private String station;
 
-    public Instant getTapDate() {
-        return tapDate;
+    public Long getUnixTimestamp() {
+        return unixTimestamp;
     }
 
-    public void setTapDate(Instant tapDate) {
-        this.tapDate = tapDate;
+    public void setUnixTimestamp(Long unixTimestamp) {
+        this.unixTimestamp = unixTimestamp;
     }
 
     public Long getCustomerId() {

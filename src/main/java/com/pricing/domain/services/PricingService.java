@@ -11,10 +11,7 @@ import com.pricing.domain.ports.IPricingService;
 import com.pricing.domain.ports.PricingConfigurationRepository;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,13 +37,13 @@ public class PricingService implements IPricingService {
         }
         final PricingConfiguration pricingConfiguration = this.pricingConfigurationRepository.loadPricingConfiguration();
 
-        Map<Long, Map<Integer, List<TapDto>>> tapsByCustomerAndByTrip = groupTapsByCustomerAndByTrip(candidateInputDto);
+        Map<Long, List<List<TapDto>>> tapsByCustomerAndByJourney = groupTapsByCustomerAndByJourney(candidateInputDto);
 
-        List<CustomerSummaryDto> customerSummaries = tapsByCustomerAndByTrip.entrySet().stream().map(entry -> {
+        List<CustomerSummaryDto> customerSummaries = tapsByCustomerAndByJourney.entrySet().stream().map(entry -> {
             final Function<List<TapDto>, TripDto> tripCalculator = getTripCalculatorFunction(pricingConfiguration);
-            final List<TripDto> trips = entry.getValue().values().stream().map(tripCalculator).collect(Collectors.toList());
+            final List<TripDto> trips = entry.getValue().stream().map(tripCalculator).collect(Collectors.toList());
             final Integer totalCostInCents = trips.stream().mapToInt(TripDto::getCostInCents).sum();
-            return new CustomerSummaryDto(String.valueOf(entry.getKey()), String.valueOf(totalCostInCents), trips);
+            return new CustomerSummaryDto(entry.getKey(), totalCostInCents, trips);
         }).collect(Collectors.toList());
         return new CandidateOutputDto(customerSummaries);
     }
@@ -55,13 +52,35 @@ public class PricingService implements IPricingService {
      * This method will group taps by customer (Long: customerId) and then group them by journey (by pairs, entry and exit)
      *
      * @param candidateInputDto candidateInputDto entries
-     * @return Map<Long, Map < Integer, List < TapDto>>> Grouped taps by customer and by Journey (two successive taps, entry and exit)
+     * @return Map<Long, List < List < TapDto>>> Grouped taps by customer and by Journey (pair of taps, entry and exit)
      */
-    private Map<Long, Map<Integer, List<TapDto>>> groupTapsByCustomerAndByTrip(final CandidateInputDto candidateInputDto) {
-        final int chunkSize = 2;
-        final AtomicInteger counter = new AtomicInteger();
-        return candidateInputDto.getTaps().stream()
-                .collect(Collectors.groupingBy(TapDto::getCustomerId, Collectors.groupingBy(it -> counter.getAndIncrement() / chunkSize)));
+    private Map<Long, List<List<TapDto>>> groupTapsByCustomerAndByJourney(final CandidateInputDto candidateInputDto) {
+
+        final Map<Long, List<TapDto>> tapsByCustomer = candidateInputDto.getTaps().stream().collect(Collectors.groupingBy(TapDto::getCustomerId));
+        Map<Long, List<List<TapDto>>> tapsByCustomerAndByJourney = new HashMap<>();
+        tapsByCustomer.forEach((key, value) -> {
+            List<List<TapDto>> customerTapsPartitionedOnPairs = splitCustomerTapsOnPairs(value);
+            tapsByCustomerAndByJourney.put(key, customerTapsPartitionedOnPairs);
+        });
+        return tapsByCustomerAndByJourney;
+    }
+
+    /**
+     * This method split taps on pairs
+     *
+     * @param taps list of taps
+     * @return list of pairs of taps
+     */
+    private List<List<TapDto>> splitCustomerTapsOnPairs(List<TapDto> taps) {
+
+        int partitionSize = 2;
+        final List<List<TapDto>> partitions = new ArrayList<>();
+
+        for (int i = 0; i < taps.size(); i += partitionSize) {
+            partitions.add(taps.subList(i, Math.min(i + partitionSize,
+                    taps.size())));
+        }
+        return partitions;
     }
 
     /**
@@ -72,7 +91,7 @@ public class PricingService implements IPricingService {
      */
     private Function<List<TapDto>, TripDto> getTripCalculatorFunction(final PricingConfiguration pricingConfiguration) {
         return (List<TapDto> taps) -> {
-            final TripDto tripDto = new TripDto(taps.get(0).getStation(), taps.get(1).getStation(), taps.get(0).getTapDate());
+            final TripDto tripDto = new TripDto(taps.get(0).getStation(), taps.get(1).getStation(), taps.get(0).getUnixTimestamp());
             try {
                 setFromAndToZones(pricingConfiguration, tripDto);
                 tripDto.setCostInCents(calculateTripCost(pricingConfiguration, tripDto));

@@ -33,10 +33,10 @@ public class Station {
         return this.zones.size() > 1;
     }
 
-    public String getSelectedZoneAsString(StationType stationType, boolean isStartStationBeforeEndStation) {
+    public Integer getSelectedZoneAsString(StationType stationType, boolean isStartStationBeforeEndStation) {
 
         if (!isBoundary()) {
-            return String.valueOf(this.zones.iterator().next().getZoneId());
+            return this.zones.iterator().next().getZoneId();
         }
         final OptionalInt zoneIdOptional;
         if ((StationType.START == stationType && isStartStationBeforeEndStation) || (StationType.END == stationType && !isStartStationBeforeEndStation)) {
@@ -45,7 +45,7 @@ public class Station {
             zoneIdOptional = this.zones.stream().mapToInt(Zone::getZoneId).min();
         }
         if (zoneIdOptional.isPresent()) {
-            return String.valueOf(zoneIdOptional.getAsInt());
+            return zoneIdOptional.getAsInt();
         }
         return null;
     }

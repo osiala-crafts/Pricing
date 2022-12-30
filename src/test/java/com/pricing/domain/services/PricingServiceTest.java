@@ -18,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
 import java.util.Arrays;
 
 class PricingServiceTest {
@@ -65,8 +64,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("1", trip.getZoneFrom());
-        Assertions.assertEquals("2", trip.getZoneTo());
+        Assertions.assertEquals(1, trip.getZoneFrom());
+        Assertions.assertEquals(2, trip.getZoneTo());
         Assertions.assertEquals(240, trip.getCostInCents());
     }
 
@@ -85,8 +84,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("2", trip.getZoneFrom());
-        Assertions.assertEquals("1", trip.getZoneTo());
+        Assertions.assertEquals(2, trip.getZoneFrom());
+        Assertions.assertEquals(1, trip.getZoneTo());
         Assertions.assertEquals(240, trip.getCostInCents());
     }
 
@@ -105,8 +104,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("3", trip.getZoneFrom());
-        Assertions.assertEquals("4", trip.getZoneTo());
+        Assertions.assertEquals(3, trip.getZoneFrom());
+        Assertions.assertEquals(4, trip.getZoneTo());
         Assertions.assertEquals(200, trip.getCostInCents());
     }
 
@@ -125,8 +124,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("2", trip.getZoneFrom());
-        Assertions.assertEquals("1", trip.getZoneTo());
+        Assertions.assertEquals(2, trip.getZoneFrom());
+        Assertions.assertEquals(1, trip.getZoneTo());
         Assertions.assertEquals(240, trip.getCostInCents());
     }
 
@@ -145,8 +144,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("1", trip.getZoneFrom());
-        Assertions.assertEquals("2", trip.getZoneTo());
+        Assertions.assertEquals(1, trip.getZoneFrom());
+        Assertions.assertEquals(2, trip.getZoneTo());
         Assertions.assertEquals(240, trip.getCostInCents());
     }
 
@@ -165,8 +164,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("4", trip.getZoneFrom());
-        Assertions.assertEquals("3", trip.getZoneTo());
+        Assertions.assertEquals(4, trip.getZoneFrom());
+        Assertions.assertEquals(3, trip.getZoneTo());
         Assertions.assertEquals(200, trip.getCostInCents());
 
     }
@@ -186,8 +185,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("3", trip.getZoneFrom());
-        Assertions.assertEquals("3", trip.getZoneTo());
+        Assertions.assertEquals(3, trip.getZoneFrom());
+        Assertions.assertEquals(3, trip.getZoneTo());
         Assertions.assertEquals(200, trip.getCostInCents());
     }
 
@@ -206,8 +205,8 @@ class PricingServiceTest {
         assertThereIsOneTripInCandidateOutput(candidateOutputDto);
         final TripDto trip = candidateOutputDto.getCustomerSummaries().get(0).getTrips().get(0);
 
-        Assertions.assertEquals("3", trip.getZoneFrom());
-        Assertions.assertEquals("3", trip.getZoneTo());
+        Assertions.assertEquals(3, trip.getZoneFrom());
+        Assertions.assertEquals(3, trip.getZoneTo());
         Assertions.assertEquals(200, trip.getCostInCents());
     }
 
@@ -216,12 +215,12 @@ class PricingServiceTest {
         TapDto tapDto11 = new TapDto();
         tapDto11.setCustomerId(1L);
         tapDto11.setStation("A");
-        tapDto11.setTapDate(Instant.now());
+        tapDto11.setUnixTimestamp(1L);
 
         TapDto tapDto12 = new TapDto();
         tapDto12.setCustomerId(1L);
         tapDto12.setStation("D");
-        tapDto12.setTapDate(Instant.now());
+        tapDto12.setUnixTimestamp(2L);
         candidateInputDto.setTaps(Arrays.asList(tapDto11, tapDto12));
         return candidateInputDto;
     }

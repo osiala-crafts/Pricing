@@ -1,24 +1,18 @@
 package com.pricing.application.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pricing.application.utils.UnixTimestampSerializer;
-
-import java.time.Instant;
-
 public class TripDto {
 
     private String stationStart;
     private String stationEnd;
-    @JsonSerialize(using = UnixTimestampSerializer.class)
-    private Instant startedJourneyAt;
+    private Long startedJourneyAt;
     private Integer costInCents;
-    private String zoneFrom;
-    private String zoneTo;
+    private Integer zoneFrom;
+    private Integer zoneTo;
 
     public TripDto() {
     }
 
-    public TripDto(String stationStart, String stationEnd, Instant startedJourneyAt) {
+    public TripDto(String stationStart, String stationEnd, Long startedJourneyAt) {
         this.stationStart = stationStart;
         this.stationEnd = stationEnd;
         this.startedJourneyAt = startedJourneyAt;
@@ -40,11 +34,11 @@ public class TripDto {
         this.stationEnd = stationEnd;
     }
 
-    public Instant getStartedJourneyAt() {
+    public Long getStartedJourneyAt() {
         return startedJourneyAt;
     }
 
-    public void setStartedJourneyAt(Instant startedJourneyAt) {
+    public void setStartedJourneyAt(Long startedJourneyAt) {
         this.startedJourneyAt = startedJourneyAt;
     }
 
@@ -56,19 +50,19 @@ public class TripDto {
         this.costInCents = costInCents;
     }
 
-    public String getZoneFrom() {
+    public Integer getZoneFrom() {
         return zoneFrom;
     }
 
-    public void setZoneFrom(String zoneFrom) {
+    public void setZoneFrom(Integer zoneFrom) {
         this.zoneFrom = zoneFrom;
     }
 
-    public String getZoneTo() {
+    public Integer getZoneTo() {
         return zoneTo;
     }
 
-    public void setZoneTo(String zoneTo) {
+    public void setZoneTo(Integer zoneTo) {
         this.zoneTo = zoneTo;
     }
 }
