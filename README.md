@@ -11,7 +11,10 @@ In this project we are using hexagonal architecture to separate concerns, how th
   
 - Application layer (left side / user side) : containing how our billing/pricing business logic is used, in our case we are using main arguments from command line, which can be replace by other adapters like API controllers or others.  
 - Domain layer(inside hexagon) : containing business logic implementation.  
-- Infrastructure layer(right side / server side) : containing what business logic need to work, in our case we are using file configuration which can be replaced by any other adapter without impacting the other layers.
+- Infrastructure layer(right side / server side) : containing what business logic need to work, in our case we are using file configuration which can be replaced by any other adapter without impacting the other layers. 
+
+![alt text](https://github.com/osiala-crafts/Pricing/blob/master/src/main/resources/spec/arc.PNG?raw=true)
+
  
 #### Build details
 This project is built using maven.
